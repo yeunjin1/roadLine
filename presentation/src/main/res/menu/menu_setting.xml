@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/btnRefreshCurrency"
+        android:title="@string/currency_load_label" />
+    <item
+        android:id="@+id/btnRate"
+        android:title="@string/make_rate_label"/>
+    <item
+        android:id="@+id/btnVersionInfo"
+        android:title="@string/version_info_label"/>
+</menu>

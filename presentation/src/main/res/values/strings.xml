@@ -1,0 +1,47 @@
+<resources>
+    <string name="app_name">RoadLine</string>
+    <string name="photo">사진첩</string>
+    <string name="money">가계부</string>
+    <string name="kakao_share">카톡 공유</string>
+    <string name="travel_date">%s ~ %s</string>
+    <string name="all">ALL</string>
+    <string name="a">A</string>
+    <string name="mon">월</string>
+    <string name="tue">화</string>
+    <string name="wed">수</string>
+    <string name="thu">목</string>
+    <string name="fri">금</string>
+    <string name="sat">토</string>
+    <string name="sun">일</string>
+
+    <string name="select_date_guide">날짜를 선택하세요</string>
+    <string name="input_title_guide">여행 제목을 입력해주세요</string>
+    <string name="input_date_guide">여행 날짜를 입력해주세요</string>
+    <string name="travel_list_no_data">첫 여행을 기록해 보세요</string>
+    <string name="travel_list_title">여행 목록</string>
+    <string name="travel_list_sub_title">- 오늘은 어디로 떠나시나요?</string>
+
+    <string name="do_delete_label">삭제하기</string>
+    <string name="delete_label">삭제</string>
+    <string name="do_edit_label">수정하기</string>
+    <string name="edit_label">수정</string>
+    <string name="confirm_label">확인</string>
+    <string name="cancel_label">취소</string>
+    <string name="close_label">닫기</string>
+    <string name="alarm_label">알림</string>
+    <string name="add_travel_label">여행 추가</string>
+    <string name="travel_date_label">여행 날짜</string>
+    <string name="currency_label">화폐</string>
+    <string name="main_pic_label">대표 사진</string>
+    <string name="currency_load_label">환율 갱신</string>
+    <string name="make_rate_label">별점 남기기</string>
+    <string name="version_info_label">버전 정보</string>
+    <string name="updated_at">UPDATED AT </string>
+
+
+    <string name="delete_confirm_msg">삭제하시겠습니까?</string>
+    <string name="input_travel_title_msg">  여행 제목을 입력하세요  </string>
+    <string name="search_currency_msg">화폐를 검색하세요</string>
+    <string name="add_pic_msg">추억함에 사진을 추가하세요</string>
+    <string name="currency_load_done_msg">환율 갱신이 완료되었습니다</string>
+</resources>
