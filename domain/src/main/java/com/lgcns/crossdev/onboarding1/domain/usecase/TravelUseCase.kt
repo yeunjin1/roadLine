@@ -39,3 +39,10 @@ class UpdateTravelUseCase @Inject constructor(
 ) {
     suspend operator fun invoke(travel: Travel) = travelRepository.updateTravel(travel)
 }
+
+@Singleton
+class GetCurrenciesByTravelUseCase @Inject constructor(
+    private val travelRepository: TravelRepository
+) {
+    operator fun invoke(travelId: Long) = travelRepository.getCurrenciesByTravel(travelId)
+}

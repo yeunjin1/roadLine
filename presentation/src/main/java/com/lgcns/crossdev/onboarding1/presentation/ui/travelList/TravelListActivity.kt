@@ -18,8 +18,11 @@ import com.lgcns.crossdev.onboarding1.presentation.ui.plan.PlanActivity
 import com.lgcns.crossdev.onboarding1.presentation.dialog.BaseDialog
 import com.lgcns.crossdev.onboarding1.presentation.dialog.TravelAddDialog
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import timber.log.Timber
 
 @AndroidEntryPoint
 class TravelListActivity : BaseActivity<ActivityTravelListBinding>(
@@ -33,10 +36,12 @@ class TravelListActivity : BaseActivity<ActivityTravelListBinding>(
         splashScreen = installSplashScreen()
         super.onCreate(savedInstanceState)
         binding.viewModel = viewModel
+
     }
 
     override fun initView() {
         setupListAdapter()
+
         binding.btnAddTravel.setOnClickListener {
             val dialog = TravelAddDialog.Builder(this@TravelListActivity, viewModel)
             dialog.create().show()
@@ -52,8 +57,11 @@ class TravelListActivity : BaseActivity<ActivityTravelListBinding>(
                 R.id.btnRefreshCurrency -> {
                     val dialog = BaseDialog.Builder(this@TravelListActivity).create()
                     dialog.setTitle(getString(R.string.currency_load_label))
-                        .setMessage("${getString(R.string.updated_at)}")
-                        .setOkButton(getString(R.string.close_label)) { viewModel.loadRemoteCurrency() }
+                        .setMessage("${getString(R.string.updated_at)} ${viewModel.getLatestCurrencyLoadDate()}")
+                        .setOkButton(getString(R.string.update_label)) {
+                            dialog.dismissDialog()
+                            viewModel.loadRemoteCurrency()
+                        }
                         .show()
 
                 }
@@ -94,6 +102,16 @@ class TravelListActivity : BaseActivity<ActivityTravelListBinding>(
                 else if (it == TravelListViewModel.LoadStatus.DONE) {
                     binding.pbLoading.visibility = View.GONE
                     Toast.makeText(this@TravelListActivity, getString(R.string.currency_load_done_msg), Toast.LENGTH_SHORT).show()
+                }
+                else if(it == TravelListViewModel.LoadStatus.ERROR) {
+                    binding.pbLoading.visibility = View.GONE
+                }
+            }
+        }
+        lifecycleScope.launch {
+            viewModel.errorMessage.collectLatest {
+                if(it.isNotEmpty()) {
+                    Toast.makeText(this@TravelListActivity, it, Toast.LENGTH_SHORT).show()
                 }
             }
         }

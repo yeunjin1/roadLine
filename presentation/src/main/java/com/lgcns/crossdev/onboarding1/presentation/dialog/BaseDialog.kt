@@ -33,7 +33,8 @@ open class BaseDialog(context: Context) : Dialog(context) {
             dialog.binding.btnClose.setOnClickListener { dialog.dismiss() }
             return this
         }
-        
+
+
 
         fun setTitle(text: String): Builder {
             dialog.binding.title = text

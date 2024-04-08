@@ -3,9 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
     <data>
+        <import type="java.util.List" />
         <variable
             name="travel"
             type="com.lgcns.crossdev.onboarding1.domain.model.Travel" />
+        <variable
+            name="currencyCodes"
+            type="List&lt;String>" />
+        <variable
+            name="viewModel"
+            type="com.lgcns.crossdev.onboarding1.presentation.ui.travelList.TravelListViewModel" />
     </data>
 
 
@@ -81,36 +88,26 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvTravelTitle" />
 
-            <Spinner
-                android:autofillHints="@string/search_currency_msg"
-                android:id="@+id/spCurrency"
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:background="@null"
-                android:spinnerMode="dialog"
-                app:layout_constraintBottom_toBottomOf="@+id/tvCurrencyTitle"
-                app:layout_constraintStart_toEndOf="@+id/tvCurrencyTitle"
-                app:layout_constraintTop_toTopOf="@+id/tvCurrencyTitle"/>
-
             <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvCurrency"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/rvCurrency"
-                app:layout_constraintTop_toBottomOf="@id/tvCurrencyTitle"
+                android:clipToPadding="false"
+                android:orientation="horizontal"
                 android:paddingStart="24dp"
                 android:paddingEnd="6dp"
-                android:clipToPadding="false"
-                tools:listitem="@layout/item_currency"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                android:orientation="horizontal"/>
-
-
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvCurrencyTitle"
+                app:listData="@{viewModel.selectedCurrencyCodes}"
+                tools:listitem="@layout/item_currency" />
             <TextView
                 android:id="@+id/tvDateTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="25dp"
                 android:text="@string/travel_date_label"
                 android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -122,7 +119,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:text="@{travel.dateStart!=null?travel.dateStart+` ~ `+travel.dateEnd : @string/select_date_guide}"
+                android:text="@{travel.dateStart!=null ? travel.dateStart+` ~ `+travel.dateEnd : @string/select_date_guide}"
                 android:gravity="center"
                 android:textColor="@color/gray66"
                 android:textSize="16sp"

@@ -9,4 +9,5 @@ interface TravelRepository {
     suspend fun insertTravel(travel: Travel): Long
     suspend fun deleteTravel(travel: Travel)
     suspend fun updateTravel(travel: Travel)
+    fun getCurrenciesByTravel(travelId: Long): Flow<List<String>>
 }

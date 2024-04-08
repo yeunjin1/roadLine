@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <import type="java.util.List" />
+        <import type="com.lgcns.crossdev.onboarding1.domain.model.Currency" />
+        <variable
+            name="currencyList"
+            type="List&lt;Currency>" />
+
+    </data>
+
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="@color/white"
+        android:layout_gravity="center"
+        app:cardCornerRadius="12dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:layout_gravity="center">
+
+
+            <TextView
+                android:id="@+id/tvDialogTitle"
+                android:text="@string/add_currency_label"
+                style="@style/DialogTitleTextView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <ImageButton
+                android:id="@+id/btnClose"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
+                android:background="@drawable/background_button_ripple"
+                android:src="@drawable/ic_close_black"
+                android:layout_marginEnd="10dp"
+                app:layout_constraintBottom_toBottomOf="@id/tvDialogTitle"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tvDialogTitle" />
+
+            <View
+                android:id="@+id/dialogDivider"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:background="@color/grayE0"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvDialogTitle" />
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvCurrency"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/dialogDivider"
+                app:listData="@{currencyList}"
+                tools:listitem="@layout/item_all_currency" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+</layout>

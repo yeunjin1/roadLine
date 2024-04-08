@@ -15,6 +15,7 @@
     <string name="sun">일</string>
 
     <string name="select_date_guide">날짜를 선택하세요</string>
+    <string name="select_currency_guide">화폐를 선택하세요</string>
     <string name="input_title_guide">여행 제목을 입력해주세요</string>
     <string name="input_date_guide">여행 날짜를 입력해주세요</string>
     <string name="travel_list_no_data">첫 여행을 기록해 보세요</string>
@@ -29,14 +30,16 @@
     <string name="cancel_label">취소</string>
     <string name="close_label">닫기</string>
     <string name="alarm_label">알림</string>
+    <string name="update_label">갱신</string>
     <string name="add_travel_label">여행 추가</string>
+    <string name="add_currency_label">화폐 추가</string>
     <string name="travel_date_label">여행 날짜</string>
     <string name="currency_label">화폐</string>
     <string name="main_pic_label">대표 사진</string>
     <string name="currency_load_label">환율 갱신</string>
     <string name="make_rate_label">별점 남기기</string>
     <string name="version_info_label">버전 정보</string>
-    <string name="updated_at">UPDATED AT </string>
+    <string name="updated_at">Updated at </string>
 
 
     <string name="delete_confirm_msg">삭제하시겠습니까?</string>
@@ -44,4 +47,6 @@
     <string name="search_currency_msg">화폐를 검색하세요</string>
     <string name="add_pic_msg">추억함에 사진을 추가하세요</string>
     <string name="currency_load_done_msg">환율 갱신이 완료되었습니다</string>
+
+
 </resources>

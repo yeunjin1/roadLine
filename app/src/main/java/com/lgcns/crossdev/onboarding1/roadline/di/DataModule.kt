@@ -60,9 +60,11 @@ object DataModule {
     @CurrencyLocalDataSource
     @Provides
     fun provideCurrencyLocalDataSource(
-        currencyDao: CurrencyDao
+        currencyDao: CurrencyDao,
+        context: Context
     ) = CurrencyLocalDataSource(
-        currencyDao
+        currencyDao,
+        context
     )
 
     @Singleton

@@ -7,6 +7,7 @@ import androidx.room.Query
 import com.lgcns.crossdev.onboarding1.data.entity.CurrencyEntity
 import com.lgcns.crossdev.onboarding1.data.entity.TravelEntity
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.StateFlow
 
 @Dao
 interface CurrencyDao {

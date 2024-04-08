@@ -1,12 +1,10 @@
 package com.lgcns.crossdev.onboarding1.data.network
 
-import com.lgcns.crossdev.onboarding1.data.dto.ApiResult
 import com.lgcns.crossdev.onboarding1.data.dto.CurrencyResponse
-import com.lgcns.crossdev.onboarding1.data.retrofit.ApiResultCallAdapter
+import com.lgcns.crossdev.onboarding1.data.retrofit.ResultCallAdapterFactory
 import com.lgcns.crossdev.onboarding1.data.util.Constants.CURRENCY_BASE_URL
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
-import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
@@ -15,7 +13,7 @@ import retrofit2.http.Query
 interface CurrencyApiClient {
     @GET("exchangeJSON")
     suspend fun getCurrency(@Query("authkey") authKey: String
-                            , @Query("data") dataType: String) : ApiResult<Response<List<CurrencyResponse>>>
+                            , @Query("data") dataType: String) : Result<List<CurrencyResponse>>
 
     companion object {
         fun create() : CurrencyApiClient {
@@ -34,7 +32,7 @@ interface CurrencyApiClient {
                 .baseUrl(CURRENCY_BASE_URL)
                 .client(client)
                 .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(ApiResultCallAdapter.Factory())
+                .addCallAdapterFactory(ResultCallAdapterFactory())
                 .build()
                 .create(CurrencyApiClient::class.java)
         }

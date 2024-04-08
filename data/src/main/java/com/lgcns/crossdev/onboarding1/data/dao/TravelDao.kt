@@ -16,6 +16,9 @@ interface TravelDao {
     @Query("SELECT * FROM travel WHERE id = :travelId")
     fun getTravelById(travelId: Long): Flow<TravelEntity>
 
+//    @Query("SELECT currencyCodes FROM travel WHERE id = :travelId")
+//    fun getCurrenciesByTravelId(travelId: Long): Flow<List<String>>
+
     @Insert
     suspend fun insertTravel(travel: TravelEntity): Long
 
