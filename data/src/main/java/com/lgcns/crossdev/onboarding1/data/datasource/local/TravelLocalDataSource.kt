@@ -20,10 +20,6 @@ class TravelLocalDataSource @Inject constructor(
         return travelDao.getTravelById(travelId)
     }
 
-    fun getCurrenciesByTravelId(travelId: Long): Flow<List<String>> {
-        return travelDao.getTravelById(travelId).map { it.currencyCodes }
-    }
-
     suspend fun insertTravel(travel: TravelEntity): Long {
         return travelDao.insertTravel(travel)
     }

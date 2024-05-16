@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.lgcns.crossdev.onboarding1.presentation.ui.plan.PlanViewModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".presentation.plan.PlanFragment">
+
+        <include
+            android:id="@+id/btnAll"
+            layout="@layout/item_date_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvDates"
+            android:orientation="horizontal"
+            app:listData="@{viewModel.travel.dateStart.datesUntil(viewModel.travel.dateEnd.plusDays(1)).toList()}"
+            tools:listitem="@layout/item_date_button"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="@+id/btnAll"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/btnAll"/>
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabs"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            app:layout_constraintTop_toBottomOf="@id/rvDates"
+            android:background="@color/normalBlue" />
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/vpPlans"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toBottomOf="@id/tabs"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:background="@color/lightBlue"/>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fabAdd"
+            setVisible="@{viewModel.selectedDate != null}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="24dp"
+            android:backgroundTint="@color/white"
+            android:clickable="true"
+            android:src="@drawable/ic_add"
+            app:borderWidth="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:visibility="invisible" />
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

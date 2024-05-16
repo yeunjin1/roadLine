@@ -3,12 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
     <data>
-        <import type="java.util.List" />
-        <import type="com.lgcns.crossdev.onboarding1.domain.model.Currency" />
         <variable
-            name="currencyList"
-            type="List&lt;Currency>" />
-
+            name="viewModel"
+            type="com.lgcns.crossdev.onboarding1.presentation.ui.travelList.TravelListViewModel" />
     </data>
 
 
@@ -66,7 +63,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/dialogDivider"
-                app:listData="@{currencyList}"
+                app:listData="@{viewModel.allCurrencyList}"
                 tools:listitem="@layout/item_all_currency" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

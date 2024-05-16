@@ -24,4 +24,13 @@ abstract class BaseFragment<T : ViewDataBinding>(
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initView()
+        setObserve()
+    }
+
+    open fun initView() {}
+
+    open fun setObserve() {}
 }

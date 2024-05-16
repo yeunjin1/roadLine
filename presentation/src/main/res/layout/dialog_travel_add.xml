@@ -3,13 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
     <data>
-        <import type="java.util.List" />
         <variable
             name="travel"
             type="com.lgcns.crossdev.onboarding1.domain.model.Travel" />
-        <variable
-            name="currencyCodes"
-            type="List&lt;String>" />
         <variable
             name="viewModel"
             type="com.lgcns.crossdev.onboarding1.presentation.ui.travelList.TravelListViewModel" />
@@ -131,29 +127,28 @@
 
             <TextView
                 android:id="@+id/tvThumbnailTitle"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
-                android:layout_marginTop="15dp"
-                android:text="@string/main_pic_label"
+                android:layout_marginTop="25dp"
+                android:text="@string/cover_pic_label"
                 android:textSize="18sp"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvDate"
-                android:visibility="gone"/>
+                app:layout_constraintTop_toBottomOf="@+id/tvDate" />
 
             <ImageView
                 android:id="@+id/ivThumbnail"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_marginHorizontal="24dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="8dp"
                 android:scaleType="centerCrop"
+                setVisible="@{travel.img != null}"
                 app:layout_constraintDimensionRatio="16:9"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvThumbnailTitle"
-                app:srcCompat="@null"
-                tools:layout_editor_absoluteX="24dp"
-                android:visibility="gone"/>
+                app:srcCompat="@null" />
 
             <TextView
                 android:id="@+id/tvThumbnailGuide"
@@ -162,11 +157,13 @@
                 android:layout_marginHorizontal="24dp"
                 android:layout_marginTop="8dp"
                 android:gravity="center"
-                android:text="@string/add_pic_msg"
+                android:text="@string/input_picture_guide"
                 android:textColor="@color/lightGray"
-                app:layout_constraintDimensionRatio="16:9" app:layout_constraintTop_toBottomOf="@+id/tvThumbnailTitle"
-                tools:layout_editor_absoluteX="24dp"
-                android:visibility="gone"/>
+                app:layout_constraintDimensionRatio="16:9"
+                app:layout_constraintEnd_toEndOf="parent"
+                setVisible="@{travel.img == null}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvThumbnailTitle" />
 
             <Button
                 android:id="@+id/btnOk"

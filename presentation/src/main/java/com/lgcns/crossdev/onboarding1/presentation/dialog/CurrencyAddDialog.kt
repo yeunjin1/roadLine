@@ -5,64 +5,67 @@ import android.content.Context
 import android.graphics.Color
 import android.graphics.Point
 import android.graphics.drawable.ColorDrawable
+import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import com.lgcns.crossdev.onboarding1.domain.model.Currency
 import com.lgcns.crossdev.onboarding1.domain.model.Travel
 import com.lgcns.crossdev.onboarding1.presentation.R
 import com.lgcns.crossdev.onboarding1.presentation.databinding.DialogCurrencyAddBinding
+import com.lgcns.crossdev.onboarding1.presentation.databinding.DialogTravelAddBinding
 import com.lgcns.crossdev.onboarding1.presentation.ui.travelList.AllCurrencyListAdapter
 import com.lgcns.crossdev.onboarding1.presentation.ui.travelList.CurrencyListAdapter
 import com.lgcns.crossdev.onboarding1.presentation.ui.travelList.TravelListViewModel
+import com.lgcns.crossdev.onboarding1.presentation.util.extension.getSerializable
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
-class CurrencyAddDialog(context: Context): Dialog(context) {
+class CurrencyAddDialog(private val listener: AllCurrencyListAdapter.OnItemClickListener): DialogFragment() {
 
-    val binding: DialogCurrencyAddBinding by lazy {
-        DialogCurrencyAddBinding.inflate(LayoutInflater.from(context))
+    private lateinit var binding: DialogCurrencyAddBinding
+    private val viewModel: TravelListViewModel by activityViewModels()
+    private lateinit var allCurrencyListAdapter: AllCurrencyListAdapter
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        isCancelable = true
     }
 
-    class Builder(private val mContext: Context, private val listener: AllCurrencyListAdapter.OnItemClickListener) {
-        private val dialog = CurrencyAddDialog(mContext)
-        private lateinit var allCurrencyListAdapter: AllCurrencyListAdapter
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        binding = DialogCurrencyAddBinding.inflate(inflater, container, false)
+        binding.lifecycleOwner = this
+        binding.viewModel = viewModel
+        return binding.root
+    }
 
-        fun create(currencyList: List<Currency>): Builder {
-            dialog.create()
-            dialog.setContentView(dialog.binding.root)
-            dialog.binding.currencyList = currencyList
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-            dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-            val size = Point()
-            dialog.window!!.windowManager.defaultDisplay.getSize(size)
-            dialog.window!!.attributes.let{
-                it.height = ConstraintLayout.LayoutParams.WRAP_CONTENT
-                it.width = (size.x * 0.872f).toInt()
+        dialog?.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        val size = Point()
+        dialog!!.window!!.windowManager.defaultDisplay.getSize(size)
+        dialog!!.window!!.attributes.let{
+            it.height = ConstraintLayout.LayoutParams.WRAP_CONTENT
+            it.width = (size.x * 0.872f).toInt()
+        }
+        allCurrencyListAdapter = AllCurrencyListAdapter(object : AllCurrencyListAdapter.OnItemClickListener {
+            override fun onItemClick(currency: Currency) {
+                listener.onItemClick(currency)
+                dismiss()
             }
-
-            allCurrencyListAdapter = AllCurrencyListAdapter(object : AllCurrencyListAdapter.OnItemClickListener {
-                override fun onItemClick(currency: Currency) {
-                    listener.onItemClick(currency)
-                    dismissDialog()
-                }
-            })
-            dialog.binding.rvCurrency.adapter = allCurrencyListAdapter
-
-            dialog.binding.btnClose.setOnClickListener { dismissDialog() }
-
-
-            return this
-        }
-
-        private fun dismissDialog() {
-            dialog.dismiss()
-        }
-
-        fun show(): CurrencyAddDialog {
-            dialog.show()
-            return dialog
-        }
+        })
+        binding.rvCurrency.adapter = allCurrencyListAdapter
+        binding.btnClose.setOnClickListener { dismiss() }
     }
+
 }

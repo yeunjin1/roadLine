@@ -12,28 +12,23 @@ import com.lgcns.crossdev.onboarding1.domain.common.exception.RoadLineException
 import com.lgcns.crossdev.onboarding1.domain.model.Currency
 import com.lgcns.crossdev.onboarding1.domain.usecase.DeleteTravelUseCase
 import com.lgcns.crossdev.onboarding1.domain.usecase.GetAllCurrenciesUseCase
-import com.lgcns.crossdev.onboarding1.domain.usecase.GetCurrenciesByTravelUseCase
 import com.lgcns.crossdev.onboarding1.domain.usecase.GetLatestCurrencyLoadDateUseCase
 import com.lgcns.crossdev.onboarding1.domain.usecase.GetTravelUseCase
 import com.lgcns.crossdev.onboarding1.domain.usecase.InsertCurrencyUseCase
 import com.lgcns.crossdev.onboarding1.domain.usecase.InsertTravelUseCase
 import com.lgcns.crossdev.onboarding1.domain.usecase.LoadRemoteCurrencyUseCase
-//import com.lgcns.crossdev.onboarding1.domain.usecase.PutLatestCurrencyLoadDateUseCase
 import com.lgcns.crossdev.onboarding1.domain.usecase.UpdateTravelUseCase
-import com.lgcns.crossdev.onboarding1.presentation.util.extension.getToday
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.onStart
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import java.time.LocalDate
-import java.time.format.DateTimeFormatter
+import timber.log.Timber
 
 @HiltViewModel
 class TravelListViewModel @Inject constructor(
@@ -45,7 +40,6 @@ class TravelListViewModel @Inject constructor(
     private val loadRemoteCurrencyUseCase: LoadRemoteCurrencyUseCase,
     private val insertCurrencyUseCase: InsertCurrencyUseCase,
     private val getLatestCurrencyLoadDateUseCase: GetLatestCurrencyLoadDateUseCase,
-    private val getCurrenciesByTravelUseCase: GetCurrenciesByTravelUseCase,
     private val getAllCurrenciesUseCase: GetAllCurrenciesUseCase,
 ) : BaseViewModel() {
 
@@ -81,6 +75,8 @@ class TravelListViewModel @Inject constructor(
     val errorMessage: SharedFlow<String>
         get() = _errorMessage.asSharedFlow()
 
+
+    // 화폐 목록 초기화
     fun setSelectedCurrencyCodes(currencyCodeList: List<String>) {
         viewModelScope.launch {
             val result = currencyCodeList.toMutableList()
@@ -89,10 +85,25 @@ class TravelListViewModel @Inject constructor(
         }
     }
 
+    // 화폐 목록 추가
     fun addSelectedCurrencyCodes(currencyCode: String) {
         viewModelScope.launch {
             val result = _selectedCurrencyCodes.value.toMutableList()
-            result.add(currencyCode)
+            result.remove("+")
+            if(!result.contains(currencyCode)) {
+                result.add(currencyCode)
+            }
+            result.add("+")
+            _selectedCurrencyCodes.emit(result)
+        }
+    }
+
+    // 화폐 목록 삭제
+    fun removeSelectedCurrencyCodes(currencyCode: String) {
+        viewModelScope.launch {
+            val result = _selectedCurrencyCodes.value.toMutableList()
+            result.remove("+")
+            result.remove(currencyCode)
             result.add("+")
             _selectedCurrencyCodes.emit(result)
         }
@@ -100,14 +111,6 @@ class TravelListViewModel @Inject constructor(
 
     fun getLatestCurrencyLoadDate() = getLatestCurrencyLoadDateUseCase.invoke()
 
-    fun getCurrenciesByTravel(travelId: Long): StateFlow<List<String>> {
-        return getCurrenciesByTravelUseCase.invoke(travelId)
-            .stateIn(
-                scope = viewModelScope,
-                started = SharingStarted.WhileSubscribed(5000),
-                initialValue = emptyList()
-            )
-    }
 
     fun insertTravel(travel: Travel){
         viewModelScope.launch(Dispatchers.IO) {
@@ -132,12 +135,26 @@ class TravelListViewModel @Inject constructor(
             _status.update { LoadStatus.LOADING }
             val result = loadRemoteCurrencyUseCase.invoke()
             result.onSuccess {
+                makeCurrencyData(it)
                 insertCurrencyUseCase.invoke(it)
                 _status.update { LoadStatus.DONE }
             }.onFailure { throwable ->
                 throwable as RoadLineException
                 _status.update { LoadStatus.ERROR }
                 _errorMessage.emit ( throwable.message )
+            }
+        }
+    }
+
+    private fun makeCurrencyData(list: List<Currency>) {
+        list.forEach {
+            if(it.code.contains("(")) {
+                val results = it.code.split("(", ")")
+                it.code = results[0]
+                it.rate = it.rate?.div(results[1].toInt())
+            }
+            if(it.code == "KRW") {
+                it.rate = 1.0
             }
         }
     }

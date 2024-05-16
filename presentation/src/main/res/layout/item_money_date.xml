@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout  xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <import type="java.util.List"/>
+        <import type="com.lgcns.crossdev.onboarding1.domain.model.Money"/>
+        <variable
+            name="moneyList"
+            type="List&lt;Money>" />
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tvDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingVertical="4dp"
+            android:textColor="@color/darkGray"
+            android:background="@color/lightBlue"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="2023년 11월 25일" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvMoney"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:spanCount="3"
+            app:listData="@{moneyList}"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvDate" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

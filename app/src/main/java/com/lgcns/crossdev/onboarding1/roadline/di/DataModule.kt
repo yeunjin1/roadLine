@@ -3,9 +3,13 @@ package com.lgcns.crossdev.onboarding1.roadline.di
 import android.content.Context
 import androidx.room.Room
 import com.lgcns.crossdev.onboarding1.data.dao.CurrencyDao
+import com.lgcns.crossdev.onboarding1.data.dao.MoneyDao
+import com.lgcns.crossdev.onboarding1.data.dao.PlanDao
 import com.lgcns.crossdev.onboarding1.data.dao.TravelDao
 import com.lgcns.crossdev.onboarding1.data.database.AppDatabase
 import com.lgcns.crossdev.onboarding1.data.datasource.local.CurrencyLocalDataSource
+import com.lgcns.crossdev.onboarding1.data.datasource.local.MoneyLocalDataSource
+import com.lgcns.crossdev.onboarding1.data.datasource.local.PlanLocalDataSource
 import com.lgcns.crossdev.onboarding1.data.datasource.remote.CurrencyRemoteDataSource
 import com.lgcns.crossdev.onboarding1.data.datasource.local.TravelLocalDataSource
 import com.lgcns.crossdev.onboarding1.data.network.CurrencyApiClient
@@ -67,6 +71,32 @@ object DataModule {
         context
     )
 
+    @Qualifier
+    @Retention(AnnotationRetention.RUNTIME)
+    annotation class PlanLocalDataSource
+
+    @Singleton
+    @PlanLocalDataSource
+    @Provides
+    fun providePlanLocalDataSource(
+        planDao: PlanDao,
+    ) = PlanLocalDataSource(
+        planDao
+    )
+
+    @Qualifier
+    @Retention(AnnotationRetention.RUNTIME)
+    annotation class MoneyLocalDataSource
+
+    @Singleton
+    @MoneyLocalDataSource
+    @Provides
+    fun provideMoneyLocalDataSource(
+        moneyDao: MoneyDao,
+    ) = MoneyLocalDataSource(
+        moneyDao
+    )
+
     @Singleton
     @Provides
     fun provideTravelDao(appDatabase: AppDatabase) = appDatabase.travelDao()
@@ -77,12 +107,20 @@ object DataModule {
 
     @Singleton
     @Provides
+    fun providePlanDao(appDatabase: AppDatabase) = appDatabase.planDao()
+
+    @Singleton
+    @Provides
+    fun provideMoneyDao(appDatabase: AppDatabase) = appDatabase.moneyDao()
+
+    @Singleton
+    @Provides
     fun provideCurrencyApiClient() = CurrencyApiClient.create()
 
 
     @Singleton
     @Provides
-    fun provideDataBase(@ApplicationContext context: Context) = Room.databaseBuilder(
+    fun provideDatabase(@ApplicationContext context: Context) = Room.databaseBuilder(
         context.applicationContext,
         AppDatabase::class.java,
         Constants.DATABASE_NAME

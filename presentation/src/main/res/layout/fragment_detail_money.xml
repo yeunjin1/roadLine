@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="viewModel"
+            type="com.lgcns.crossdev.onboarding1.presentation.ui.money.MoneyViewModel" />
+        <import type="com.lgcns.crossdev.onboarding1.presentation.util.extension.StringExtensionKt"/>
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/tvDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="8dp"
+            android:paddingVertical="4dp"
+            setVisible="@{viewModel.selectedDate != null}"
+            android:text="@{viewModel.selectedDate == null ? `` : StringExtensionKt.toStringDate(viewModel.selectedDate, `yyyy.MM.dd (E)`)}"
+            android:textColor="@color/darkGray"
+            android:textSize="18sp"
+            android:background="@drawable/button_background"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="2023.11.25 (월)" />
+
+        <com.github.mikephil.charting.charts.PieChart
+            android:id="@+id/chartMoney"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@+id/rvMoney"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvDate" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline"
+            app:layout_constraintGuide_percent="0.5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvMoney"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/guideline" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

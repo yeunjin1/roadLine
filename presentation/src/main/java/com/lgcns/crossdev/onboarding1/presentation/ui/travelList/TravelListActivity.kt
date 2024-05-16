@@ -14,12 +14,10 @@ import com.lgcns.crossdev.onboarding1.domain.model.Travel
 import com.lgcns.crossdev.onboarding1.presentation.R
 import com.lgcns.crossdev.onboarding1.presentation.base.BaseActivity
 import com.lgcns.crossdev.onboarding1.presentation.databinding.ActivityTravelListBinding
-import com.lgcns.crossdev.onboarding1.presentation.ui.plan.PlanActivity
+import com.lgcns.crossdev.onboarding1.presentation.ui.plan.TravelActivity
 import com.lgcns.crossdev.onboarding1.presentation.dialog.BaseDialog
 import com.lgcns.crossdev.onboarding1.presentation.dialog.TravelAddDialog
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import timber.log.Timber
@@ -36,15 +34,29 @@ class TravelListActivity : BaseActivity<ActivityTravelListBinding>(
         splashScreen = installSplashScreen()
         super.onCreate(savedInstanceState)
         binding.viewModel = viewModel
+        checkCurrencyUpdate()
+    }
 
+    private fun checkCurrencyUpdate() {
+        val date = viewModel.getLatestCurrencyLoadDate()
+        if(date.isEmpty()) {
+            val dialog = BaseDialog.Builder(this@TravelListActivity).create()
+            dialog.setTitle(getString(R.string.currency_load_label))
+                .setMessage(getString(R.string.need_update_currency_msg))
+                .setOkButton(getString(R.string.update_label)) {
+                    dialog.dismissDialog()
+                    viewModel.loadRemoteCurrency()
+                }
+                .show()
+        }
     }
 
     override fun initView() {
         setupListAdapter()
 
         binding.btnAddTravel.setOnClickListener {
-            val dialog = TravelAddDialog.Builder(this@TravelListActivity, viewModel)
-            dialog.create().show()
+            val dialog = TravelAddDialog()
+            dialog.show(supportFragmentManager, "TravelAddDialog")
         }
 
         binding.appBar.addOnOffsetChangedListener { _, verticalOffset: Int ->
@@ -121,14 +133,22 @@ class TravelListActivity : BaseActivity<ActivityTravelListBinding>(
     private fun setupListAdapter() {
         travelListAdapter = TravelListAdapter(object : TravelListAdapter.OnItemClickListener {
            override fun onItemClick(travel: Travel) {
-               val intent = Intent(this@TravelListActivity, PlanActivity::class.java)
-               intent.putExtra("travelId", travel.id)
-               startActivity(intent)
+               if(travelListAdapter.editMode) {
+                   travelListAdapter.toggleEditMode()
+               }
+               else {
+                   val intent = Intent(this@TravelListActivity, TravelActivity::class.java)
+                   intent.putExtra("travelId", travel.id)
+                   startActivity(intent)
+               }
            }
 
            override fun onEditClick(travel: Travel) {
-               val dialog = TravelAddDialog.Builder(this@TravelListActivity, viewModel)
-               dialog.create(travel).show()
+               val dialog = TravelAddDialog()
+               val bundle = Bundle()
+               bundle.putSerializable("travel", travel)
+               dialog.arguments = bundle
+               dialog.show(supportFragmentManager, "TravelAddDialog")
            }
 
            override fun onDeleteClick(travel: Travel) {
@@ -142,9 +162,13 @@ class TravelListActivity : BaseActivity<ActivityTravelListBinding>(
                    }
                    .show()
            }
+
         })
         binding.rvTravel.adapter = travelListAdapter
     }
 
+    companion object {
+        const val TAG = "TravelListActivity"
+    }
 
 }

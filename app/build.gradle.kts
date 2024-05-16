@@ -1,3 +1,5 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -18,6 +20,14 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        // Set the properties within `local.properties` into a `Properties` class so that values
+        // within `local.properties` (e.g. Maps API key) are accessible in this file.
+        val properties = Properties()
+        properties.load(project.rootProject.file("local.properties").inputStream())
+        manifestPlaceholders["MAPS_API_KEY"] = properties.getProperty("MAPS_API_KEY", "")
+        // Set API keys in BuildConfig
+        buildConfigField("String", "MAPS_API_KEY", "\"${properties.getProperty(" MAPS_API_KEY ")}\"")
     }
 
     buildTypes {

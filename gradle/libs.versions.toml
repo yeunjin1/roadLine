@@ -22,7 +22,13 @@ jsoup = "1.17.2"
 okhttp = "4.12.0"
 retrofit = "2.9.0"
 kotlinxSerializationJson = "1.4.1"
-
+androidxNavigation = "2.7.7"
+googleMaps = "2.0.1"
+gmsPlaces = "18.2.0"
+googeleMapsPlaces = "3.4.0"
+gmsLocation="21.2.0"
+glide="4.16.0"
+chart="3.1.0"
 
 
 [plugins]
@@ -33,6 +39,8 @@ kotlin-kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+google-maps = { id = "com.google.android.libraries.mapsplatform.secrets-gradle-plugin", version.ref = "googleMaps" }
+nav-safe-args = { id = "androidx.navigation.safeargs.kotlin", version.ref = "androidxNavigation" }
 
 
 [libraries]
@@ -43,6 +51,7 @@ androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version
 androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
 androidx-activity = { group = "androidx.activity", name = "activity-ktx", version.ref = "androidxActivity" }
 androidx-fragment = { group = "androidx.fragment", name = "fragment-ktx", version.ref = "androidxFragment" }
+
 
 # Material
 material-core = { group = "com.google.android.material", name = "material", version.ref = "material" }
@@ -61,6 +70,10 @@ room-runtime = { module="androidx.room:room-runtime", version.ref="room" }
 room-compiler = { module="androidx.room:room-compiler", version.ref="room" }
 room-ktx = { module="androidx.room:room-ktx", version.ref="room" }
 room-paging = { module="androidx.room:room-paging", version.ref="room" }
+
+#Navigation
+navigation-fragment = { module = "androidx.navigation:navigation-fragment-ktx", version.ref = "androidxNavigation" }
+navigation-ui = { module = "androidx.navigation:navigation-ui-ktx", version.ref = "androidxNavigation" }
 
 # Kotlin
 kotlinx-coroutines-android = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "kotlinxCoroutines" }
@@ -85,8 +98,20 @@ retrofit-converter-gson = { group = "com.squareup.retrofit2", name = "converter-
 okhttp-core = { group = "com.squareup.okhttp3", name = "okhttp", version.ref = "okhttp" }
 okhttp-logging = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okhttp" }
 
+# Google Maps
+gms-places = { group = "com.google.android.gms", name = "play-services-maps", version.ref = "gmsPlaces" }
+gms-location = { group = "com.google.android.gms", name = "play-services-location", version.ref = "gmsLocation" }
+google-maps-places = { group = "com.google.android.libraries.places", name = "places", version.ref = "googeleMapsPlaces" }
+
+# Glide
+glide = { group = "com.github.bumptech.glide", name = "glide", version.ref = "glide" }
+
+# Chart
+chart = { group = "com.github.PhilJay", name = "MPAndroidChart", version.ref = "chart" }
 
 [bundles]
 test = ["junit4"]
 androidTest = ["androidx-test-junit", "androidx-test-espresso-core"]
 room = ["room-runtime","room-ktx","room-paging"]
+navigation = ["navigation-fragment","navigation-ui"]
+googleMaps = ["gms-places","gms-location","google-maps-places"]

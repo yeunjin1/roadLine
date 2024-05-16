@@ -17,10 +17,19 @@
     <string name="select_date_guide">날짜를 선택하세요</string>
     <string name="select_currency_guide">화폐를 선택하세요</string>
     <string name="input_title_guide">여행 제목을 입력해주세요</string>
+    <string name="input_plan_place_guide">장소를 입력해주세요</string>
     <string name="input_date_guide">여행 날짜를 입력해주세요</string>
+    <string name="edit_place_name_guide">위치 이름을 변경하세요</string>
+    <string name="input_time_guide">시간을 입력하세요</string>
+    <string name="input_memo_guide">메모를 입력하세요</string>
+    <string name="input_price_guide">가격을 입력하세요</string>
+    <string name="input_picture_guide">사진을 추가하세요</string>
+    <string name="input_money_price_guide">가격을 입력하세요</string>
+    <string name="input_money_guide">가계부 내역을 입력하세요</string>
     <string name="travel_list_no_data">첫 여행을 기록해 보세요</string>
     <string name="travel_list_title">여행 목록</string>
     <string name="travel_list_sub_title">- 오늘은 어디로 떠나시나요?</string>
+
 
     <string name="do_delete_label">삭제하기</string>
     <string name="delete_label">삭제</string>
@@ -32,6 +41,7 @@
     <string name="alarm_label">알림</string>
     <string name="update_label">갱신</string>
     <string name="add_travel_label">여행 추가</string>
+    <string name="edit_travel_label">여행 수정</string>
     <string name="add_currency_label">화폐 추가</string>
     <string name="travel_date_label">여행 날짜</string>
     <string name="currency_label">화폐</string>
@@ -40,6 +50,25 @@
     <string name="make_rate_label">별점 남기기</string>
     <string name="version_info_label">버전 정보</string>
     <string name="updated_at">Updated at </string>
+    <string name="plan_main_label">일정 메인</string>
+    <string name="plan_vertical_label">일정 세로 보기</string>
+    <string name="plan_horizontal_label">일정 가로 보기</string>
+    <string name="plan_map_label">일정 지도 보기</string>
+    <string name="plan_add_label">일정 추가</string>
+    <string name="plan_edit_label">일정 수정</string>
+    <string name="input_time_label">시간 선택</string>
+    <string name="money_label">가계부</string>
+    <string name="add_money_label">가계부 추가</string>
+    <string name="edit_money_label">가계부 수정</string>
+    <string name="meal_label">식사</string>
+    <string name="shopping_label">쇼핑</string>
+    <string name="transportation_label">교통</string>
+    <string name="tour_label">관광</string>
+    <string name="lodging_label">숙소</string>
+    <string name="etc_label">기타</string>
+    <string name="add_pic_label">사진 추가</string>
+    <string name="cover_pic_label">커버 사진</string>
+
 
 
     <string name="delete_confirm_msg">삭제하시겠습니까?</string>
@@ -47,6 +76,8 @@
     <string name="search_currency_msg">화폐를 검색하세요</string>
     <string name="add_pic_msg">추억함에 사진을 추가하세요</string>
     <string name="currency_load_done_msg">환율 갱신이 완료되었습니다</string>
+    <string name="need_update_currency_msg">환율 갱신이 필요합니다</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>

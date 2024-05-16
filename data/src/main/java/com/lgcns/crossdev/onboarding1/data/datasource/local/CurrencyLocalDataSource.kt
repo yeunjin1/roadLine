@@ -19,13 +19,9 @@ class CurrencyLocalDataSource @Inject constructor(
     }
 
     fun getAllCurrency(): Flow<List<CurrencyEntity>> = currencyDao.getAllCurrency()
-    suspend fun insertCurrencies(currencies: List<CurrencyEntity>) {
-        currencyDao.insertCurrencies(currencies)
-    }
-    fun getLatestCurrencyLoadDate(): String {
-        return prefs.getString("latestCurrencyLoadDate", "").toString()
-    }
-    fun putLatestCurrencyLoadDate(date: String) {
-        prefs.edit().putString("latestCurrencyLoadDate", date).apply()
-    }
+    fun getCurrenciesByCode(code: List<String>): Flow<List<CurrencyEntity>> = currencyDao.getCurrenciesByCode(code)
+    suspend fun insertCurrencies(currencies: List<CurrencyEntity>) = currencyDao.insertCurrencies(currencies)
+    fun getLatestCurrencyLoadDate(): String = prefs.getString("latestCurrencyLoadDate", "").toString()
+    fun putLatestCurrencyLoadDate(date: String) = prefs.edit().putString("latestCurrencyLoadDate", date).apply()
+    suspend fun deleteCurrencies() = currencyDao.deleteCurrencies()
 }

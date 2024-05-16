@@ -22,9 +22,13 @@ class CurrencyRepositoryImpl @Inject constructor(
 
     override fun getAllCurrencies(): Flow<List<Currency>> = currencyLocalDataSource.getAllCurrency().toModel()
 
+    override fun getCurrenciesByCode(code: List<String>): Flow<List<Currency>> = currencyLocalDataSource.getCurrenciesByCode(code).toModel()
+
     override suspend fun insertCurrencies(currencies: List<Currency>) = currencyLocalDataSource.insertCurrencies(currencies.toEntity())
 
     override fun getLatestCurrencyLoadDate(): String = currencyLocalDataSource.getLatestCurrencyLoadDate()
 
     override fun putLatestCurrencyLoadDate(date: String) = currencyLocalDataSource.putLatestCurrencyLoadDate(date)
+
+    override suspend fun deleteCurrencies() = currencyLocalDataSource.deleteCurrencies()
 }

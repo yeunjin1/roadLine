@@ -3,6 +3,7 @@ package com.lgcns.crossdev.onboarding1.data.dao
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
+import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
 import com.lgcns.crossdev.onboarding1.data.entity.TravelEntity
@@ -16,10 +17,7 @@ interface TravelDao {
     @Query("SELECT * FROM travel WHERE id = :travelId")
     fun getTravelById(travelId: Long): Flow<TravelEntity>
 
-//    @Query("SELECT currencyCodes FROM travel WHERE id = :travelId")
-//    fun getCurrenciesByTravelId(travelId: Long): Flow<List<String>>
-
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertTravel(travel: TravelEntity): Long
 
     @Delete

@@ -26,4 +26,9 @@
         <item name="windowSplashScreenAnimatedIcon">@drawable/logo</item>
         <item name="postSplashScreenTheme">@style/Theme.RoadLine</item>
     </style>
+    
+    <style name="timePickerTheme">
+        <item name="android:fontFamily">@font/notosanskr</item>
+        <item name="android:textColorPrimary">@color/gray66</item>
+    </style>
 </resources>

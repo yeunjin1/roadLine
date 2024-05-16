@@ -21,12 +21,25 @@
         <item name="android:fontFamily">@font/notosanskr</item>
     </style>
 
+    <style name="CategoryRadioButtonStyle" parent="RadioButtonStyle">
+        <item name="android:layout_width">50dp</item>
+        <item name="android:layout_height">50dp</item>
+        <item name="android:layout_marginStart">4dp</item>
+        <item name="android:layout_marginEnd">4dp</item>
+        <item name="android:button">@null</item>
+        <item name="android:gravity">center_horizontal|bottom</item>
+        <item name="android:layout_gravity">bottom</item>
+
+    </style>
+
+
+
+
     <style name="ToolbarTextView" parent="@style/TextViewStyle">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_gravity">center</item>
-        <item name="android:textStyle">bold</item>
-        <item name="android:textSize">23sp</item>
+        <item name="android:textSize">20sp</item>
         <item name="android:paddingRight">8dp</item>
         <item name="android:paddingLeft">8dp</item>
     </style>
@@ -86,4 +99,6 @@
         <item name="android:padding">12dp</item>
         <item name="android:scaleType">centerInside</item>
     </style>
+
+
 </resources>

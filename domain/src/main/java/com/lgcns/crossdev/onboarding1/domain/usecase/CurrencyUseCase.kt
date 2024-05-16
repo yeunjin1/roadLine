@@ -19,6 +19,7 @@ class InsertCurrencyUseCase @Inject constructor(
     private val currencyRepository: CurrencyRepository
 ) {
     suspend operator fun invoke(currencies: List<Currency>) {
+        currencyRepository.deleteCurrencies()
         currencyRepository.insertCurrencies(currencies)
         currencyRepository.putLatestCurrencyLoadDate(LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy.MM.dd")))
     }
@@ -37,4 +38,11 @@ class GetAllCurrenciesUseCase @Inject constructor(
     private val currencyRepository: CurrencyRepository
 ) {
     operator fun invoke() = currencyRepository.getAllCurrencies()
+}
+
+@Singleton
+class GetCurrenciesByCodeUseCase @Inject constructor(
+    private val currencyRepository: CurrencyRepository
+) {
+    operator fun invoke(code: List<String>) = currencyRepository.getCurrenciesByCode(code)
 }

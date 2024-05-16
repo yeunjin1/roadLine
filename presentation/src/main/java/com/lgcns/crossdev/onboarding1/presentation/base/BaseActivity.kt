@@ -12,12 +12,14 @@ abstract class BaseActivity<T : ViewDataBinding>(
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        loadData()
         binding = DataBindingUtil.setContentView(this, layoutResourceId)
         binding.lifecycleOwner = this
         initView()
         setObserve()
     }
 
+    open fun loadData() {}
     open fun initView() {}
     open fun setObserve() {}
 }

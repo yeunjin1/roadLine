@@ -27,6 +27,4 @@ class TravelRepositoryImpl @Inject constructor(
     override suspend fun deleteTravel(travel: Travel) = travelLocalDataSource.deleteTravel(travel.toEntity())
 
     override suspend fun updateTravel(travel: Travel) = travelLocalDataSource.updateTravel(travel.toEntity())
-
-    override fun getCurrenciesByTravel(travelId: Long): Flow<List<String>> = travelLocalDataSource.getCurrenciesByTravelId(travelId)
 }

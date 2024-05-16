@@ -3,7 +3,8 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.kapt)
     alias(libs.plugins.hilt)
-//    alias(libs.plugins.ksp)
+    alias(libs.plugins.google.maps)
+    alias(libs.plugins.nav.safe.args)
 }
 
 android {
@@ -39,6 +40,7 @@ android {
     }
 }
 
+
 dependencies {
     implementation(project(":domain"))
 
@@ -53,4 +55,9 @@ dependencies {
     coreLibraryDesugaring(libs.desugar.jdk.libs)
     implementation(libs.calendar.view)
     implementation(libs.androidx.splashscreen)
+    implementation(libs.bundles.navigation)
+    implementation(libs.bundles.googleMaps)
+    implementation(libs.glide)
+    implementation(libs.chart)
+
 }

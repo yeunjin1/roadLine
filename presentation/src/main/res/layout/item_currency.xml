@@ -26,6 +26,7 @@
             android:paddingHorizontal="16dp"
             android:paddingVertical="6dp"
             android:text="@{currencyCode}"
+            android:textColor="@color/gray66"
             android:textSize="12sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"

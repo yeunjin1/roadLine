@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout  xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <import type="com.lgcns.crossdev.onboarding1.presentation.util.extension.DateTimeExtensionKt"/>
+        <import type="com.lgcns.crossdev.onboarding1.domain.model.PlanViewType"/>
+        <variable
+            name="plan"
+            type="com.lgcns.crossdev.onboarding1.domain.model.Plan" />
+        <variable
+            name="listener"
+            type="com.lgcns.crossdev.onboarding1.presentation.ui.plan.VerticalPlanListAdapter.OnItemClickListener" />
+        <import type="kotlinx.coroutines.flow.StateFlow"/>
+        <variable
+            name="editMode"
+            type="Boolean" />
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/itemLayout"
+        android:onClick="@{()->listener.onItemClick(plan)}"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp">
+        <View
+            android:id="@+id/view"
+            android:layout_width="wrap_content"
+            android:layout_height="0.5dp"
+            android:layout_marginEnd="10dp"
+            android:background="@color/lightGray" app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"/>
+        <View
+            android:id="@+id/barTop"
+            android:layout_width="@dimen/line_width"
+            android:layout_height="0dp"
+            setVisible="@{plan.viewType == PlanViewType.MIDDLE || plan.viewType == PlanViewType.BOTTOM}"
+            app:layout_constraintStart_toStartOf="@id/circle"
+            app:layout_constraintEnd_toEndOf="@id/circle"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/circle"
+            android:layout_marginBottom="@dimen/circle_radius"
+            android:background="@color/gray66"/>
+        <View
+            android:id="@+id/barBottom"
+            android:layout_width="@dimen/line_width"
+            android:layout_height="0dp"
+            setVisible="@{plan.viewType == PlanViewType.MIDDLE || plan.viewType == PlanViewType.TOP}"
+            app:layout_constraintStart_toStartOf="@id/circle"
+            app:layout_constraintEnd_toEndOf="@id/circle"
+            app:layout_constraintTop_toTopOf="@id/circle"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginTop="@dimen/circle_radius"
+            android:background="@color/gray66"/>
+        <View
+            android:id="@+id/circle"
+            android:layout_width="@dimen/circle_size"
+            android:layout_height="@dimen/circle_size"
+            android:background="@drawable/row_plan_circle"
+            android:layout_marginHorizontal="12dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <TextView
+            android:id="@+id/rs_spotTime"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="7dp"
+            android:layout_marginBottom="7dp"
+            android:gravity="center"
+            android:paddingHorizontal="5dp"
+            android:text="@{DateTimeExtensionKt.totalMinToStringShort(plan.time)}"
+            android:textColor="@color/colorPrimary"
+            android:textSize="13sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/rs_spotName"
+            app:layout_constraintStart_toEndOf="@+id/circle"
+            app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/rs_spotName"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="7dp"
+            android:layout_marginBottom="7dp"
+            android:ellipsize="end"
+            android:gravity="start|center_vertical"
+            android:maxLines="1"
+            android:paddingHorizontal="5dp"
+            android:text="@{plan.name}" android:textSize="17sp"
+            app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toStartOf="@id/btnDrag"
+            app:layout_constraintStart_toEndOf="@id/rs_spotTime" app:layout_constraintTop_toTopOf="parent"/>
+
+        <ImageView
+            android:id="@+id/btnDrag"
+            setVisible="@{!editMode}"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:background="@drawable/drag_icon"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/rs_spotName"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:visibility="invisible" />
+<!--        setTouchListener="@{() -> listener.onItemDrag(plan, viewHolder)}"-->
+<!--        setVisible="@{!viewModel.editMode}"-->
+
+        <ImageView
+            android:onClick="@{()->listener.onItemDelete(plan)}"
+            setVisible="@{editMode}"
+            android:id="@+id/btnDelete"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toEndOf="@id/rs_spotName"
+            app:layout_constraintTop_toTopOf="parent" app:srcCompat="@drawable/delete"/>
+<!--        setVisible="@{viewModel.editMode}"-->
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

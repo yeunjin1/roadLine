@@ -20,7 +20,7 @@ class ResultCall<T>(private val call: Call<T>, private val retrofit: Retrofit) :
 
                 if (response.isSuccessful) {
 
-                    if(response.body() == null) {
+                    if(response.body() == null || (response.body() is List<*> && (response.body() as List<*>).isEmpty())) {
                         callback.onResponse(
                             this@ResultCall,
                             Response.success(Result.failure(RoadLineException("body가 비었습니다.", HttpException(response))))

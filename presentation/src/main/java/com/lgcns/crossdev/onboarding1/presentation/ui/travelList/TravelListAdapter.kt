@@ -8,12 +8,22 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.lgcns.crossdev.onboarding1.domain.model.Travel
 import com.lgcns.crossdev.onboarding1.presentation.databinding.ItemTravelBinding
 
 class TravelListAdapter(private val onItemClickListener: OnItemClickListener): ListAdapter<Travel, TravelListAdapter.TravelViewHolder>(
     TravelDiffUtil()
 ) {
+    private var _editMode = false
+    val editMode: Boolean
+        get() = _editMode
+
+    fun toggleEditMode() {
+        _editMode = !_editMode
+        notifyItemRangeChanged(0, itemCount)
+    }
+
     interface OnItemClickListener{
         fun onItemClick(travel: Travel)
         fun onEditClick(travel: Travel)
@@ -23,6 +33,11 @@ class TravelListAdapter(private val onItemClickListener: OnItemClickListener): L
     inner class TravelViewHolder(private var binding: ItemTravelBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(item:Travel){
             binding.item = item
+            binding.editMode = _editMode
+            binding.cardView.setOnLongClickListener {
+                toggleEditMode()
+                return@setOnLongClickListener true
+            }
             binding.onItemClickListener = onItemClickListener
         }
     }

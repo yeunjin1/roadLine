@@ -1,5 +1,6 @@
 package com.lgcns.crossdev.onboarding1.domain.model
 
+import java.io.Serializable
 import java.time.LocalDate
 import java.time.LocalDateTime
 
@@ -8,6 +9,6 @@ data class Travel(
     var title: String,
     var dateStart: LocalDate,
     var dateEnd: LocalDate,
-    val img: String? = null,
-    val currencyCodes: List<String> = emptyList()
-)
+    var img: String? = null,
+    var currencyCodes: List<String> = emptyList()
+): Serializable
