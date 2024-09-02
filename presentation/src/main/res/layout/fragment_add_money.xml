@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="viewModel"
+            type="com.lgcns.crossdev.onboarding1.presentation.ui.money.AddMoneyViewModel" />
+        <import type="com.lgcns.crossdev.onboarding1.presentation.util.extension.StringExtensionKt"/>
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.money.AddMoneyFragment">
+
+        <TextView
+            android:id="@+id/tvDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="8dp"
+            android:paddingVertical="4dp"
+            android:text="@{StringExtensionKt.toStringDate(viewModel.money.date, `yyyy.MM.dd (E)`)}"
+            android:textColor="@color/darkGray"
+            android:textSize="18sp"
+            android:background="@drawable/button_background"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="2023.11.25 (월)" />
+
+        <ImageView
+            android:id="@+id/ivAddMoney"
+            setVisible="@{viewModel.money.img != null}"
+            android:scaleType="centerCrop"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvDate" />
+        <TextView
+            android:id="@+id/tvAddMoney"
+            setVisible="@{viewModel.money.img == null}"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvDate"
+            android:text="@string/input_picture_guide"
+            android:textColor="@color/darkGray"
+            android:gravity="center"/>
+
+        <EditText
+            android:id="@+id/tvPrice"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:ems="10"
+            android:hint="@string/input_price_guide"
+            android:inputType="numberDecimal"
+            android:paddingEnd="10dp"
+            android:text="@{viewModel.money.price != null ? String.valueOf(viewModel.money.price) : null}"
+            android:textAlignment="textEnd"
+            app:layout_constraintEnd_toStartOf="@+id/spCurrency"
+            app:layout_constraintHorizontal_chainStyle="spread"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ivAddMoney" />
+
+        <Spinner
+            android:id="@+id/spCurrency"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginEnd="8dp"
+            android:background="@null"
+            app:layout_constraintBottom_toBottomOf="@+id/tvPrice"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/tvPrice"
+            app:layout_constraintTop_toTopOf="@+id/tvPrice" />
+
+        <TextView
+            android:id="@+id/tvExchange"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:textAlignment="textEnd"
+            android:textStyle="italic"
+            app:layout_constraintEnd_toEndOf="@+id/tvPrice"
+            app:layout_constraintTop_toBottomOf="@+id/tvPrice"
+            tools:text="10000원" />
+
+        <RadioGroup
+            android:id="@+id/rgCategory"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="@+id/spCurrency"
+            app:layout_constraintStart_toStartOf="@+id/tvPrice"
+            app:layout_constraintTop_toBottomOf="@+id/tvExchange">
+
+            <RadioButton
+                android:id="@+id/btnMeal"
+                style="@style/CategoryRadioButtonStyle"
+                android:background="@drawable/radio_meal" />
+
+            <RadioButton
+                android:id="@+id/btnShopping"
+                style="@style/CategoryRadioButtonStyle"
+                android:background="@drawable/radio_shopping" />
+
+            <RadioButton
+                android:id="@+id/btnTrans"
+                style="@style/CategoryRadioButtonStyle"
+                android:background="@drawable/radio_transport" />
+
+            <RadioButton
+                android:id="@+id/btnTour"
+                style="@style/CategoryRadioButtonStyle"
+                android:background="@drawable/radio_tour" />
+
+            <RadioButton
+                android:id="@+id/btnLodging"
+                style="@style/CategoryRadioButtonStyle"
+                android:background="@drawable/radio_lodgment" />
+
+            <RadioButton
+                android:id="@+id/btnEtc"
+                style="@style/CategoryRadioButtonStyle"
+                android:background="@drawable/radio_etc" />
+        </RadioGroup>
+
+        <EditText
+            android:id="@+id/tvMemo"
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="16dp"
+            android:background="@color/white"
+            android:ems="10"
+            android:gravity="center"
+            android:hint="@string/input_memo_guide"
+            android:inputType="textMultiLine"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:text="@={viewModel.money.memo}"
+            app:layout_constraintEnd_toEndOf="@+id/rgCategory"
+            app:layout_constraintStart_toStartOf="@+id/rgCategory"
+            app:layout_constraintTop_toBottomOf="@+id/rgCategory" />
+
+        <TextView
+            android:id="@+id/btnConfirm"
+            style="@style/BlueButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/button_background"
+            android:text="@string/confirm_label"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

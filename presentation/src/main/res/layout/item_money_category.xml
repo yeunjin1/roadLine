@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="sumPrice"
+            type="Double" />
+        <variable
+            name="category"
+            type="String" />
+        <import type="com.lgcns.crossdev.onboarding1.presentation.util.extension.StringExtensionKt"/>
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:paddingVertical="7dp"
+        android:paddingHorizontal="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tvCategory"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            tools:text="식사"
+            android:text="@{category}"
+            android:textSize="15sp"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <TextView
+            android:id="@+id/tvPrice"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            tools:text="3000원"
+            android:text="@{StringExtensionKt.toFormatPrice(sumPrice, `KRW`) + `원`}"
+            android:gravity="end"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/tvCategory"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/tvCategory"
+            app:layout_constraintTop_toTopOf="@+id/tvCategory" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

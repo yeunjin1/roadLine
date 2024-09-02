@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+<!--    <data>-->
+
+<!--        <variable-->
+<!--            name="isEmptyView"-->
+<!--            type="Boolean" />-->
+
+<!--        <variable-->
+<!--            name="showCurrentPosition"-->
+<!--            type="Boolean" />-->
+
+<!--        <variable-->
+<!--            name="itemCount"-->
+<!--            type="Integer" />-->
+
+<!--        <variable-->
+<!--            name="position"-->
+<!--            type="Integer" />-->
+
+<!--        <variable-->
+<!--            name="plan"-->
+<!--            type="konkuksw.mobileprogramming2019.roadline.data.entity.Plan" />-->
+
+<!--        <variable-->
+<!--            name="listener"-->
+<!--            type="konkuksw.mobileprogramming2019.roadline.presentation.plan.HorizontalPlanListAdapter.OnItemClickListener" />-->
+<!--    </data>-->
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+<!--        <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--            app:setVisible="@{!isEmptyView}"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="0dp"-->
+<!--            android:onClick="@{()->listener.onItemClick(plan)}"-->
+<!--            app:layout_constraintDimensionRatio="1:1"-->
+<!--            app:layout_constraintTop_toTopOf="parent">-->
+
+<!--            <View-->
+<!--                android:id="@+id/barLeft"-->
+<!--                app:direction="@{0}"-->
+<!--                app:position="@{position}"-->
+<!--                app:itemCount="@{itemCount}"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="@dimen/line_width"-->
+<!--                android:layout_marginEnd="@dimen/circle_radius"-->
+<!--                android:background="@color/gray66"-->
+<!--                app:layout_constraintBottom_toBottomOf="@id/circle"-->
+<!--                app:layout_constraintEnd_toEndOf="@id/circle"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toTopOf="@id/circle" />-->
+
+<!--            <View-->
+<!--                android:id="@+id/barTop"-->
+<!--                app:direction="@{1}"-->
+<!--                app:position="@{position}"-->
+<!--                app:itemCount="@{itemCount}"-->
+<!--                android:layout_width="@dimen/line_width"-->
+<!--                android:layout_height="0dp"-->
+<!--                android:layout_marginBottom="@dimen/circle_radius"-->
+<!--                android:background="@color/gray66"-->
+<!--                app:layout_constraintBottom_toBottomOf="@id/circle"-->
+<!--                app:layout_constraintEnd_toEndOf="@id/circle"-->
+<!--                app:layout_constraintStart_toStartOf="@id/circle"-->
+<!--                app:layout_constraintTop_toTopOf="parent" />-->
+
+<!--            <View-->
+<!--                android:id="@+id/barRight"-->
+<!--                app:direction="@{2}"-->
+<!--                app:position="@{position}"-->
+<!--                app:itemCount="@{itemCount}"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="@dimen/line_width"-->
+<!--                android:layout_marginStart="@dimen/circle_radius"-->
+<!--                android:background="@color/gray66"-->
+<!--                app:layout_constraintBottom_toBottomOf="@id/circle"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintStart_toStartOf="@id/circle"-->
+<!--                app:layout_constraintTop_toTopOf="@id/circle" />-->
+
+<!--            <View-->
+<!--                android:id="@+id/barBottom"-->
+<!--                app:direction="@{3}"-->
+<!--                app:position="@{position}"-->
+<!--                app:itemCount="@{itemCount}"-->
+<!--                android:layout_width="@dimen/line_width"-->
+<!--                android:layout_height="0dp"-->
+<!--                android:layout_marginTop="@dimen/circle_radius"-->
+<!--                android:background="@color/gray66"-->
+<!--                app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                app:layout_constraintEnd_toEndOf="@id/circle"-->
+<!--                app:layout_constraintStart_toStartOf="@id/circle"-->
+<!--                app:layout_constraintTop_toTopOf="@id/circle" />-->
+
+<!--            <View-->
+<!--                android:id="@+id/circle"-->
+<!--                android:layout_width="@dimen/circle_size"-->
+<!--                android:layout_height="@dimen/circle_size"-->
+<!--                android:background="@drawable/row_plan_circle"-->
+<!--                app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toTopOf="parent" />-->
+
+<!--            <ImageView-->
+<!--                android:id="@+id/man_img"-->
+<!--                setVisible="@{showCurrentPosition}"-->
+<!--                android:layout_width="30dp"-->
+<!--                android:layout_height="30dp"-->
+<!--                android:layout_gravity="center_horizontal|top"-->
+<!--                android:layout_marginBottom="8dp"-->
+<!--                app:layout_constraintBottom_toBottomOf="@id/circle"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:srcCompat="@drawable/run" />-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/plan_Item_textView"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_gravity="bottom|center_horizontal"-->
+<!--                android:layout_marginStart="8dp"-->
+<!--                android:layout_marginEnd="8dp"-->
+<!--                android:layout_marginBottom="8dp"-->
+<!--                android:gravity="center"-->
+<!--                android:text="@{plan.name}"-->
+<!--                android:textColor="@color/black"-->
+<!--                android:textSize="12sp"-->
+<!--                app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintStart_toStartOf="parent" />-->
+
+<!--        </androidx.constraintlayout.widget.ConstraintLayout>-->
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

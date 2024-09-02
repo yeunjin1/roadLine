@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@+id/nav_plan">
+    <fragment
+        android:id="@+id/nav_plan"
+        android:name="com.lgcns.crossdev.onboarding1.presentation.ui.plan.PlanFragment"
+        tools:layout="@layout/fragment_plan">
+        <action
+            android:id="@+id/action_nav_plan_to_nav_add_plan"
+            app:destination="@id/nav_add_plan" />
+        <action
+            android:id="@+id/action_nav_plan_to_nav_money"
+            app:destination="@id/nav_money" />
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/nav_add_plan"
+        android:name="com.lgcns.crossdev.onboarding1.presentation.ui.plan.AddPlanFragment"
+        tools:layout="@layout/fragment_add_plan">
+        <argument
+            android:name="plan"
+            app:argType="com.lgcns.crossdev.onboarding1.test.model.Plan"
+            app:nullable="true"
+            android:defaultValue="@null" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_money"
+        android:name="com.lgcns.crossdev.onboarding1.presentation.ui.money.MoneyFragment"
+        android:label="@string/money_label"
+        tools:layout="@layout/fragment_money" >
+        <action
+            android:id="@+id/action_nav_money_to_nav_add_money"
+            app:destination="@id/nav_add_money" />
+        <action
+            android:id="@+id/action_nav_money_to_nav_detail_money"
+            app:destination="@id/nav_detail_money" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_add_money"
+        android:name="com.lgcns.crossdev.onboarding1.presentation.ui.money.AddMoneyFragment"
+        tools:layout="@layout/fragment_add_money" >
+        <argument
+            android:name="money"
+            app:argType="com.lgcns.crossdev.onboarding1.test.model.Money"
+            app:nullable="true"
+            android:defaultValue="@null" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_detail_money"
+        android:name="com.lgcns.crossdev.onboarding1.presentation.ui.money.DetailMoneyFragment"
+        tools:layout="@layout/fragment_detail_money" >
+    </fragment>
+
+
+</navigation>
