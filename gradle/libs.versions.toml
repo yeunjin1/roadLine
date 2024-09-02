@@ -29,6 +29,9 @@ googeleMapsPlaces = "3.4.0"
 gmsLocation="21.2.0"
 glide="4.16.0"
 chart="3.1.0"
+org-jetbrains-kotlin-jvm = "1.9.10"
+javaxInject = "1"
+
 
 
 [plugins]
@@ -41,6 +44,7 @@ hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 google-maps = { id = "com.google.android.libraries.mapsplatform.secrets-gradle-plugin", version.ref = "googleMaps" }
 nav-safe-args = { id = "androidx.navigation.safeargs.kotlin", version.ref = "androidxNavigation" }
+org-jetbrains-kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "org-jetbrains-kotlin-jvm" }
 
 
 [libraries]
@@ -64,6 +68,8 @@ androidx-test-espresso-core = { group = "androidx.test.espresso", name = "espres
 # DI
 hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
 hilt-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "hilt" }
+javax-inject = { group = "javax.inject", name = "javax.inject", version.ref = "javaxInject" }
+
 
 # Room
 room-runtime = { module="androidx.room:room-runtime", version.ref="room" }

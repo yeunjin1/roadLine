@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
     <data>
         <import type="java.util.List"/>
-        <import type="com.lgcns.crossdev.onboarding1.domain.model.Money"/>
+        <import type="com.lgcns.crossdev.onboarding1.test.model.Money"/>
         <variable
             name="moneyList"
             type="List&lt;Money>" />

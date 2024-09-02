@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools">
     <data>
         <import type="com.lgcns.crossdev.onboarding1.presentation.util.extension.DateTimeExtensionKt"/>
-        <import type="com.lgcns.crossdev.onboarding1.domain.model.PlanViewType"/>
+        <import type="com.lgcns.crossdev.onboarding1.test.model.PlanViewType"/>
         <variable
             name="plan"
-            type="com.lgcns.crossdev.onboarding1.domain.model.Plan" />
+            type="com.lgcns.crossdev.onboarding1.test.model.Plan" />
         <variable
             name="listener"
             type="com.lgcns.crossdev.onboarding1.presentation.ui.plan.VerticalPlanListAdapter.OnItemClickListener" />

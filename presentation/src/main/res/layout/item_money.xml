@@ -8,7 +8,7 @@
             type="com.lgcns.crossdev.onboarding1.presentation.ui.money.MoneyGridListAdapter.OnItemClickListener" />
         <variable
             name="money"
-            type="com.lgcns.crossdev.onboarding1.domain.model.Money" />
+            type="com.lgcns.crossdev.onboarding1.test.model.Money" />
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:onClick="@{()->listener.onItemClick(money)}"

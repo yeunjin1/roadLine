@@ -5,7 +5,7 @@
     <data>
         <variable
             name="currency"
-            type="com.lgcns.crossdev.onboarding1.domain.model.Currency" />
+            type="com.lgcns.crossdev.onboarding1.test.model.Currency" />
         <variable
             name="onItemClickListener"
             type="com.lgcns.crossdev.onboarding1.presentation.ui.travelList.AllCurrencyListAdapter.OnItemClickListener" />

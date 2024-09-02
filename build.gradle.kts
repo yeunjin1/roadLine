@@ -9,5 +9,6 @@ plugins {
     alias(libs.plugins.kotlin.serialization) apply false
     alias(libs.plugins.google.maps) apply false
     alias(libs.plugins.nav.safe.args) apply false
+    alias(libs.plugins.org.jetbrains.kotlin.jvm) apply false
 }
 
